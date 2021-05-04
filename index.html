@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VueJS</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="nav-bar"></div>
+    <div id='app'>
+        <div class="product">
+            <div class="product-image">
+                <img v-bind:src="image">
+            </div> 
+            <!-- v-bind:style="{text-decoration: line-through}" -->
+            <div class="product-info">
+                <h1>{{ product }}</h1>
+                <p v-if="inventory > 10">In Stock</p>
+                <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+                <p v-else>Out of Stock</p>
+                <p v-if="onSale">On Sale!</p>
+                <ul>
+                <li v-for="bob in details">{{bob}}</li>
+                </ul>
+                <div v-for="variant in variants" 
+                :key="variant.variantId"
+                class="color-box"
+                v-bind:style="{backgroundColor: variant.variantColor}"
+                @mouseover="updateProduct(variant.variantImage)">
+                    
+                </div>
+                <li v-for="bob in sizes">{{bob}}</li>
+                <button v-on:click="addToCart" 
+                :disabled="!inStock"
+                :class="{disabledButton: !inStock}">Add to Cart</button>
+                <div class="cart">
+                    <p>Cart({{cart}})</p>
+                </div>
+
+                </div>
+                    <p>{{ description }}</p>
+                </div>
+            </div>
+           <a v-bind:href="link">Visit Store</a>
+           
+        </div>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
